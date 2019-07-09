@@ -1,0 +1,8 @@
+<div id="sidenav">
+<%if user_signed_in?%>
+ <%=link_to  'My Todo List', root_path%>
+ <%=link_to  "Add an Item", new_item_path%>
+ 
+ <%end%>
+
+</div>

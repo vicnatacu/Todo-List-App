@@ -1,0 +1,22 @@
+<body>
+<div class="page">
+<h1 class="heading">Add Todo List Item</h1>
+
+<p><%@item.errors.full_messages.join()%></p>
+
+<%=form_with model: @item, local: true do  |form|%>
+<p>
+    <%=label(:details, "Add ToDo Item")%>
+    <%=form.text_field :details, minlength: 1%>
+    
+<p>
+    <%=label(:date_due, "Date due:")%>
+    <%=form.date_field :date_due%>
+</p>
+<%=form.submit "Save", class:"button"%>
+<p><%=link_to "Back", root_path%></p>
+</div>
+</body>
+
+
+<%end%>

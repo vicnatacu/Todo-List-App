@@ -1,0 +1,78 @@
+<body>
+    
+    <h1 class="heading">Welcome to ToDo List App</h1>
+    
+    <div class="page">
+    <h3 class="heading">**Your Todo List**</h3>
+
+
+        <table>
+            <tr>
+                <th class="heading">Task</th>
+                 <th class="heading">Due date</th>
+                
+                
+            </tr>
+            <% if current_user %>
+            <% @item.each do |item|%>
+            <tr> 
+        
+                <td><%=item.details%></td>
+                <td><%=item.date_due%></td>
+                <td><%=link_to "Edit", item_edit_path(id: item.id)%></td>
+                <td>
+                    <%=form_with model: item, method: :delete,local: true do |form|%>
+                    <%=form.submit "Delete"%>
+                    
+
+                <%end%>
+               </td> 
+               <td>
+                <%=form_with model: item, method: :patch, local: true do |form|%>
+                <%=form.hidden_field :done, value: true%>
+                <%=form.submit "Done"%>
+                <% end %>
+               </td>
+            </tr>
+            <%end%>
+            <% end %>
+            </table>
+            <h3 class="heading">-*-Your Completed Todo List Items-*-</h3>
+            <table>
+                    <tr>
+                <th class="heading">Task</th>
+                <th class="heading">Completed</th>
+                
+            </tr>
+            
+            <% if current_user %>
+            <% @completed_item.each do |item|%>
+            <tr> 
+        
+                <td><%=item.details%></td>
+                <td><%=item.updated_at.localtime.to_formatted_s(:short)%></td>
+                <td><%=link_to "Edit", item_edit_path(id: item.id)%></td>
+                <td>
+                    <%=form_with model: item, method: :delete,local: true do |form|%>
+                    <%=form.submit "Delete"%>
+                    
+
+                <%end%>
+               </td> 
+               <td>
+                <%=form_with model: item, method: :patch, local: true do |form|%>
+                <%=form.hidden_field :done, value: false%>
+                <%=form.submit "Undone"%>
+                <% end %>
+               </td>
+            </tr>
+            <%end%>
+            <% end %>
+
+
+            
+            
+        </table>
+    
+    </div>
+</body>
